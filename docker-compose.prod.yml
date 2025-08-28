@@ -1,0 +1,31 @@
+version: "3.9"
+   
+services:
+  backend:
+    build: 
+      context: ./backend
+    ports:
+      - "8000:8000"
+    restart: always
+    entrypoint: /entrypoint.sh
+    environment:
+        - ENVIRONMENT=production
+        - DB_HOST=${DB_HOST}
+        - DB_USER=${DB_USER}
+        - DB_PASSWORD=${DB_PASSWORD}
+        - DB_NAME=${DB_NAME}
+    volumes:
+      - staticfiles:/backend/staticfiles
+  nginx:
+    build: 
+      context: .
+      dockerfile: ./webserver/Dockerfile
+    restart: always
+    volumes:
+      - staticfiles:/staticfiles
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+volumes:
+  staticfiles:
