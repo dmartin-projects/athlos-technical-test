@@ -15,7 +15,7 @@ DEBUG = False
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "/staticfiles/"
-STATIC_ROOT ='/tmp/staticfiles'
+STATIC_ROOT = '/tmp/staticfiles'
 
 ALLOWED_HOSTS = [
     os.getenv('DOMAIN_NAME', ''),
