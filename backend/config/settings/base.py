@@ -5,10 +5,6 @@ import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-# Crear directorio de logs si no existe
-LOGS_DIR = BASE_DIR / "logs"
-LOGS_DIR.mkdir(exist_ok=True)
-
 # Application definition
 BASE_APPS = [
     'django.contrib.admin',
@@ -114,52 +110,3 @@ SPECTACULAR_SETTINGS = {
 
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = True  # soy consciente de esta config, pero para el propósito del proyecto no controlo la conexión desde otros dominios
-
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "verbose": {
-            "format": "[%(asctime)s] %(levelname)s %(process)d %(thread)d [%(pathname)s/%(module)s.%(funcName)s:%(lineno)s] %(message)s"
-            },    
-        },
-    "filters": {
-        "require_debug_false": {
-            "()": "django.utils.log.RequireDebugFalse",
-        }
-    },
-    "handlers": {
-        "debug": {
-            "level": "DEBUG",
-            "class": "logging.FileHandler",
-            "filename": LOGS_DIR / "debug.log",
-            "formatter": "verbose",
-        },
-        "info": {
-            "level": "INFO",
-            "class": "logging.FileHandler",
-            "filename": LOGS_DIR / "info.log",
-            "formatter": "verbose",
-        },
-        "warning": {
-            "level": "WARNING",
-            "class": "logging.FileHandler",
-            "filename": LOGS_DIR / "warning.log",
-            "formatter": "verbose",
-        },
-        "error": {
-            "level": "ERROR",
-            "class": "logging.FileHandler",
-            "filename": LOGS_DIR / "error.log",
-            "formatter": "verbose",
-        },
-        "console": {"level": "INFO", "class": "logging.StreamHandler", "formatter": "verbose"},
-    },
-    "loggers": {        
-        "django": {
-            "handlers": ["debug", "info", "warning", "error", "console"],
-            "level": "INFO",
-            "propagate": False,
-        },
-    },
-}

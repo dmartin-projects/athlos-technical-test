@@ -3,6 +3,10 @@ Configuración para desarrollo local
 """
 from .base import *
 
+# Crear directorio de logs si no existe
+LOGS_DIR = BASE_DIR / "logs"
+LOGS_DIR.mkdir(exist_ok=True)
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-c8+r+zx31n2lley-am@-4s&6p=(8_336*^i6vzjajt73kpg!16'
 
@@ -20,3 +24,52 @@ DATABASES = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "[%(asctime)s] %(levelname)s %(process)d %(thread)d [%(pathname)s/%(module)s.%(funcName)s:%(lineno)s] %(message)s"
+            },    
+        },
+    "filters": {
+        "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
+        }
+    },
+    "handlers": {
+        "debug": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": LOGS_DIR / "debug.log",
+            "formatter": "verbose",
+        },
+        "info": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": LOGS_DIR / "info.log",
+            "formatter": "verbose",
+        },
+        "warning": {
+            "level": "WARNING",
+            "class": "logging.FileHandler",
+            "filename": LOGS_DIR / "warning.log",
+            "formatter": "verbose",
+        },
+        "error": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": LOGS_DIR / "error.log",
+            "formatter": "verbose",
+        },
+        "console": {"level": "INFO", "class": "logging.StreamHandler", "formatter": "verbose"},
+    },
+    "loggers": {        
+        "django": {
+            "handlers": ["debug", "info", "warning", "error", "console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}

@@ -43,5 +43,7 @@ USER 10001
 # Puerto (informativo)
 EXPOSE 8000
 
+ENV DJANGO_SETTINGS_MODULE="config.settings.production"
+
 # Ejecutar entrypoint de producción
 CMD ["/entrypoint.prod.sh"]

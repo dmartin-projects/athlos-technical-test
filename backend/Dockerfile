@@ -10,12 +10,12 @@ RUN python3.10 -m venv /py && \
     /py/bin/pip install --upgrade pip setuptools wheel
 
 COPY requirements/ /backend/requirements/
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY entrypoint.dev.sh /entrypoint.dev.sh
+RUN chmod +x /entrypoint.dev.sh
 
 COPY . /backend/
 RUN chown -R appuser:appgroup /backend /py
 
 USER 10001
 
-CMD ["/entrypoint.sh"]
+CMD ["/entrypoint.dev.sh"]

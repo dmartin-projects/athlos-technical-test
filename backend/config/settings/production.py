@@ -4,6 +4,9 @@ Configuración para producción
 import os
 from .base import *
 
+LOGS_DIR = Path(os.environ.get("LOGS_DIR", "/tmp/logs"))
+
+
 # SECURITY: Use environment variable for secret key
 SECRET_KEY = os.getenv('SECRET_KEY')
 
@@ -43,3 +46,52 @@ CSRF_COOKIE_SECURE = True
 
 # CORS settings for production
 CORS_ALLOW_ALL_ORIGINS = True
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "[%(asctime)s] %(levelname)s %(process)d %(thread)d [%(pathname)s/%(module)s.%(funcName)s:%(lineno)s] %(message)s"
+            },    
+        },
+    "filters": {
+        "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
+        }
+    },
+    "handlers": {
+        "debug": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": LOGS_DIR / "debug.log",
+            "formatter": "verbose",
+        },
+        "info": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": LOGS_DIR / "info.log",
+            "formatter": "verbose",
+        },
+        "warning": {
+            "level": "WARNING",
+            "class": "logging.FileHandler",
+            "filename": LOGS_DIR / "warning.log",
+            "formatter": "verbose",
+        },
+        "error": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": LOGS_DIR / "error.log",
+            "formatter": "verbose",
+        },
+        "console": {"level": "INFO", "class": "logging.StreamHandler", "formatter": "verbose"},
+    },
+    "loggers": {        
+        "django": {
+            "handlers": ["debug", "info", "warning", "error", "console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}
