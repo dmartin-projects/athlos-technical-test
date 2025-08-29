@@ -1,0 +1,11 @@
+schemaVersion: "1.2"
+endpoints:
+    - name: rest-api-625
+      displayName: REST API
+      service:
+        basePath: /api/v1/
+        port: 8000
+      type: REST
+      networkVisibilities:
+        - Project
+        - Public
