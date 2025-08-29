@@ -3,7 +3,7 @@ endpoints:
     - name: rest-api-625
       displayName: REST API
       service:
-        basePath: /
+        basePath: /api/v1/
         port: 8000
       type: REST
       networkVisibilities:
