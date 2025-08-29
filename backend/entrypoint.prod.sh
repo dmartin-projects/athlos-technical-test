@@ -15,6 +15,10 @@ if [[ -n "${DB_HOST:-}" ]]; then
   done
 fi
 
+echo "Collect static files"
+mkdir -p /tmp/staticfiles
+python manage.py collectstatic --noinput
+
 echo "Apply database migrations"
 python manage.py migrate --noinput
 
