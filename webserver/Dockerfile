@@ -1,7 +1,8 @@
 FROM node:lts-alpine3.12 as build
 
-RUN addgroup -g 10001 appgroup && \
-    adduser -u 10001 -G appgroup -s /bin/sh -D appuser
+# Crear usuario en rango permitido por Choreo
+RUN addgroup --gid 10002 appgroup && \
+    adduser --uid 10002 --ingroup appgroup --disabled-password --gecos "" appuser
 
 WORKDIR /frontend
 COPY ./frontend/package.json ./
@@ -9,14 +10,15 @@ COPY ./frontend/package-lock.json ./
 RUN npm install
 COPY ./frontend/ ./
 RUN chown -R appuser:appgroup /frontend
-USER 10001
+USER 10002
 RUN npm run build
 
 
 FROM nginx:1.18.0-alpine
 
-RUN addgroup -g 10002 nginxgroup && \
-    adduser -u 10002 -G nginxgroup -s /bin/sh -D nginxuser
+# Crear usuario en rango permitido por Choreo
+RUN addgroup --gid 10003 nginxgroup && \
+    adduser --uid 10003 --ingroup nginxgroup --disabled-password --gecos "" nginxuser
 
 COPY ./webserver/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /frontend/build /usr/share/nginx/html
@@ -25,6 +27,6 @@ RUN chown -R nginxuser:nginxgroup /usr/share/nginx/html /etc/nginx/conf.d /var/c
     touch /var/run/nginx.pid && \
     chown nginxuser:nginxgroup /var/run/nginx.pid
 
-USER 10002
+USER 10003
 
 EXPOSE 80
