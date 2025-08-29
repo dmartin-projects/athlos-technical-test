@@ -16,10 +16,7 @@ if [[ -n "${DB_HOST:-}" ]]; then
 fi
 
 echo "Apply database migrations"
-python manage.py migrate
-
-echo "Collect static files"
-python manage.py collectstatic
+python manage.py migrate --noinput
 
 if [[ "${ENVIRONMENT:-production}" == "production" ]]; then
   echo "Starting production server with Gunicorn"

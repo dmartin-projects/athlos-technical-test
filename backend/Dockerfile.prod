@@ -45,5 +45,9 @@ EXPOSE 8000
 
 ENV DJANGO_SETTINGS_MODULE="config.settings.production"
 
+# Precolecta estáticos en build
+RUN mkdir -p /backend/staticfiles && \
+    python manage.py collectstatic --noinput
+
 # Ejecutar entrypoint de producción
 CMD ["/entrypoint.prod.sh"]
