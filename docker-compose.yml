@@ -11,10 +11,10 @@ services:
     volumes:
       - staticfiles:/backend/staticfiles
       - ./backend/db.sqlite3:/backend/db.sqlite3
-  nginx:
+  frontend:
     build: 
-      context: .
-      dockerfile: ./webserver/Dockerfile
+      context: ./frontend
+      dockerfile: ./Dockerfile
     restart: always
     volumes:
       - staticfiles:/staticfiles

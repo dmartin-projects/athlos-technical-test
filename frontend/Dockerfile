@@ -20,7 +20,7 @@ RUN addgroup --gid 10003 nginxgroup && \
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /frontend/build /usr/share/nginx/html
 
-RUN chown -R nginxuser:nginxgroup /usr/share/nginx/html /etc/nginx/conf.d /var/cache/nginx/var/log/nginx /var/run && \
+RUN chown -R nginxuser:nginxgroup /usr/share/nginx/html /etc/nginx/conf.d /var/cache/nginx /var/log/nginx /var/run && \
     touch /var/run/nginx.pid && \
     chown nginxuser:nginxgroup /var/run/nginx.pid
 
