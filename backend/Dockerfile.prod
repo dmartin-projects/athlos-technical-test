@@ -37,17 +37,15 @@ RUN chmod +x /entrypoint.prod.sh && \
 # Permisos para usuario no root
 RUN chown -R appuser:appgroup /backend /venv
 
+# Precolecta estáticos en build
+RUN mkdir -p /backend/staticfiles && \
+    python manage.py collectstatic --noinput
+
+ENV DJANGO_SETTINGS_MODULE="config.settings.production"
 # Cambiar a usuario permitido por Choreo
 USER 10001
 
 # Puerto (informativo)
 EXPOSE 8000
-
-ENV DJANGO_SETTINGS_MODULE="config.settings.production"
-
-# Precolecta estáticos en build
-RUN mkdir -p /backend/staticfiles && \
-    python manage.py collectstatic --noinput
-
 # Ejecutar entrypoint de producción
 CMD ["/entrypoint.prod.sh"]

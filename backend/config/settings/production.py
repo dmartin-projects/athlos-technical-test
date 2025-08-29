@@ -13,6 +13,10 @@ if not SECRET_KEY:
 # Security settings for production
 DEBUG = False
 
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = "/staticfiles/"
+STATIC_ROOT ='/tmp/staticfiles'
+
 ALLOWED_HOSTS = [
     os.getenv('DOMAIN_NAME', ''),
     f"api.{os.getenv('DOMAIN_NAME', '')}",
