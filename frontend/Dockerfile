@@ -1,4 +1,4 @@
-FROM node:lts-alpine3.12 as build
+FROM node:18-alpine as build
 
 RUN addgroup --gid 10002 appgroup && \
     adduser --uid 10002 --ingroup appgroup --disabled-password --gecos "" appuser
@@ -12,7 +12,7 @@ RUN chown -R appuser:appgroup /frontend
 USER 10002
 RUN npm run build
 
-FROM nginx:1.18.0-alpine
+FROM nginx:alpine
 
 RUN addgroup --gid 10003 nginxgroup && \
     adduser --uid 10003 --ingroup nginxgroup --disabled-password --gecos "" nginxuser
