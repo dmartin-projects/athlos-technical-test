@@ -4,6 +4,9 @@ RUN addgroup --gid 10002 appgroup && \
     adduser --uid 10002 --ingroup appgroup --disabled-password --gecos "" appuser
 
 WORKDIR /frontend
+
+ARG REACT_APP_DOCKER_ENV
+ENV REACT_APP_DOCKER_ENV=$REACT_APP_DOCKER_ENV
 COPY ./frontend/package.json ./
 COPY ./frontend/package-lock.json ./
 RUN npm install

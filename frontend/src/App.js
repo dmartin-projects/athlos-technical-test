@@ -9,7 +9,9 @@ function App() {
   const testBackendConnection = async () => {
     setLoading(true);
     try {
-      const apiUrl = window.configs?.REACT_APP_API_URL || 'http://localhost:8000';
+      const apiUrl = process.env.REACT_APP_DOCKER_ENV 
+        ? 'http://localhost:8000'
+        : 'https://0b6bc3f6-0480-40e8-8c57-3af2460a82da-dev.e1-eu-north-azure.choreoapis.dev/pruebatecnica-david/backend/v1.0';
       const res = await fetch(`${apiUrl}/api/v1/scrapper/test/`);
       const data = await res.json();
       setResponse(data);
