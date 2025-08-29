@@ -9,7 +9,7 @@ function App() {
   const testBackendConnection = async () => {
     setLoading(true);
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+      const apiUrl = window.configs?.REACT_APP_API_URL || 'http://localhost:8000';
       const res = await fetch(`${apiUrl}/api/v1/scrapper/test/`);
       const data = await res.json();
       setResponse(data);
