@@ -9,7 +9,7 @@ COPY ./frontend/package-lock.json ./
 RUN npm install
 COPY ./frontend/ ./
 RUN chown -R appuser:appgroup /frontend
-USER appuser
+USER 10001
 RUN npm run build
 
 
@@ -25,6 +25,6 @@ RUN chown -R nginxuser:nginxgroup /usr/share/nginx/html /etc/nginx/conf.d /var/c
     touch /var/run/nginx.pid && \
     chown nginxuser:nginxgroup /var/run/nginx.pid
 
-USER nginxuser
+USER 10002
 
 EXPOSE 80

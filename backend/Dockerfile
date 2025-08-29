@@ -16,6 +16,6 @@ RUN chmod +x /entrypoint.sh
 COPY . /backend/
 RUN chown -R appuser:appgroup /backend /py
 
-USER appuser
+USER 10001
 
 CMD ["/entrypoint.sh"]
