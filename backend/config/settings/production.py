@@ -14,8 +14,10 @@ if not SECRET_KEY:
 DEBUG = False
 
 # Static files (CSS, JavaScript, Images)
+# STATIC_URL = "/staticfiles/"
+# STATIC_ROOT = '/tmp/staticfiles'
 STATIC_URL = "/staticfiles/"
-STATIC_ROOT = '/tmp/staticfiles'
+STATIC_ROOT = BASE_DIR / '/staticfiles'
 
 ALLOWED_HOSTS = ['*']
 

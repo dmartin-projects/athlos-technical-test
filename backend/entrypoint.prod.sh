@@ -15,21 +15,14 @@ if [[ -n "${DB_HOST:-}" ]]; then
   done
 fi
 
-echo "Collect static files"
-mkdir -p /tmp/staticfiles
-python manage.py collectstatic --noinput
-
 echo "Apply database migrations"
 python manage.py migrate --noinput
 
-if [[ "${ENVIRONMENT:-production}" == "production" ]]; then
-  echo "Starting production server with Gunicorn"
-  exec gunicorn "${DJANGO_WSGI_MODULE:-config.wsgi:application}" \
-    --bind "0.0.0.0:${PORT:-8000}" \
-    --workers "${GUNICORN_WORKERS:-2}" \
-    --threads "${GUNICORN_THREADS:-4}" \
-    --timeout "${GUNICORN_TIMEOUT:-60}"
-else
-  echo "Starting development server"
-  exec python manage.py runserver "0.0.0.0:${PORT:-8000}"
-fi
+
+echo "Starting production server with Gunicorn"
+exec gunicorn "${DJANGO_WSGI_MODULE:-config.wsgi:application}" \
+  --bind "0.0.0.0:${PORT:-8000}" \
+  --workers "${GUNICORN_WORKERS:-2}" \
+  --threads "${GUNICORN_THREADS:-4}" \
+  --timeout "${GUNICORN_TIMEOUT:-60}"
+

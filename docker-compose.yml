@@ -6,11 +6,15 @@ services:
       context: ./backend
     ports:
       - "8000:8000"
+      - "5678:5678"  # debugpy
     restart: always
     entrypoint: /entrypoint.dev.sh
+    environment:
+      - DEBUG_MODE=true  
     volumes:
       - staticfiles:/backend/staticfiles
       - ./backend/db.sqlite3:/backend/db.sqlite3
+      - ./backend:/backend 
   webserver:
     build: 
       context: .

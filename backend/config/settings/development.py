@@ -9,7 +9,7 @@ LOGS_DIR.mkdir(exist_ok=True)
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "/staticfiles/"
-STATIC_ROOT = BASE_DIR / '/staticfiles'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-c8+r+zx31n2lley-am@-4s&6p=(8_336*^i6vzjajt73kpg!16'

@@ -1,48 +1,39 @@
 FROM python:3.10-slim
 
-# Configuración Python
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PIP_NO_CACHE_DIR=1
 
-# Dependencias del sistema (ajusta si necesitas compilar libs nativas)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Crear usuario en rango permitido por Choreo
 RUN addgroup --gid 10001 appgroup && \
     adduser --uid 10001 --ingroup appgroup --disabled-password --gecos "" appuser
 
-# Directorio de trabajo
 WORKDIR /backend
 
-# Virtualenv y PATH
 RUN python -m venv /venv
 ENV PATH="/venv/bin:$PATH"
 
-# Instalar dependencias de producción en BUILD
 COPY requirements/ /tmp/requirements/
 RUN pip install --upgrade pip setuptools wheel && \
-    pip install -r /tmp/requirements/production.txt
+    pip install --no-cache-dir --upgrade -r /tmp/requirements/production.txt
 
-# Copiar código de la app
 COPY . /backend
 
-# Copiar entrypoint de producción y dar permisos
 COPY entrypoint.prod.sh /entrypoint.prod.sh
 RUN chmod +x /entrypoint.prod.sh && \
     chown appuser:appgroup /entrypoint.prod.sh
 
-# Permisos para usuario no root
+ENV DJANGO_SETTINGS_MODULE="config.settings.production"
+
+RUN mkdir -p /tmp/staticfiles
+RUN python manage.py collectstatic --noinput
+
 RUN chown -R appuser:appgroup /backend /venv
 
-# Variables de entorno para producción
-ENV DJANGO_SETTINGS_MODULE="config.settings.production"
-# Cambiar a usuario permitido por Choreo
+EXPOSE 8000
 USER 10001
 
-# Puerto (informativo)
-EXPOSE 8000
-# Ejecutar entrypoint de producción
 CMD ["/entrypoint.prod.sh"]
