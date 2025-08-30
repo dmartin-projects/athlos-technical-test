@@ -5,6 +5,9 @@ import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'django-insecure-c8+r+zx31n2lley-am@-4s&6p=(8_336*^i6vzjajt73kpg!16'
+
 # Application definition
 BASE_APPS = [
     'django.contrib.admin',

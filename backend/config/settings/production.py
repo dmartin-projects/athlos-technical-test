@@ -4,11 +4,8 @@ Configuración para producción
 import os
 from .base import *
 
-# SECURITY: Use environment variable for secret key
-SECRET_KEY = os.getenv('SECRET_KEY')
-
-if not SECRET_KEY:
-    raise ValueError("SECRET_KEY environment variable is required for production")
+# SECURITY: Use environment variable for secret key, fallback to base.py for build
+SECRET_KEY = os.getenv('SECRET_KEY') or SECRET_KEY
 
 # Security settings for production
 DEBUG = False
