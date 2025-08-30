@@ -42,3 +42,16 @@ DATABASES = {
 
 # CORS settings for production
 CORS_ALLOW_ALL_ORIGINS = True
+
+# Override SPECTACULAR_SETTINGS for production
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Scrapper API',
+    'DESCRIPTION': 'API para scrapping de datos',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SCHEMA_PATH_PREFIX': '/api/v1/',
+    'SWAGGER_UI_SETTINGS': {
+        'url': '/api/v1/schema/',
+        'supportedSubmitMethods': ['get', 'post', 'put', 'patch', 'delete']
+    }
+}
