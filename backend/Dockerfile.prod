@@ -33,6 +33,7 @@ RUN chmod +x /entrypoint.prod.sh && \
 
 ENV DJANGO_SETTINGS_MODULE="config.settings.production"
 ENV SELENIUM_MANAGER_CACHE=/tmp/selenium
+RUN mkdir -p /tmp/selenium && chmod -R 777 /tmp/selenium
 
 RUN mkdir -p /tmp/staticfiles
 RUN python manage.py collectstatic --noinput

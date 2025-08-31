@@ -16,7 +16,18 @@ Web application for scraping hotel data from Booking.com with a React frontend a
 2. **Access the application:**
    - Frontend: http://localhost:80
    - Backend API: http://localhost:8000
-   - Swagger Documentation: http://localhost:8000/api/schema/swagger-ui/
+   - Swagger Documentation: http://localhost:8000/api/v1/docs/
+
+### Cloud Deploy
+
+App deployed on Choreo.  
+
+You can test this app at this [link](https://3b94243c-3966-4999-831b-ee2d97f5d397.e1-eu-north-azure.choreoapps.dev/).
+
+> Note: Choreo provides a free Postgres database with cold start.  
+> This means it shuts down every hour, and the server admin has to restart it manually.  
+> You will be able to test the first endpoint (scraping booking information), but not the endpoints that depend on the database.
+
 
 ## Architecture
 
