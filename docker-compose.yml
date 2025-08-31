@@ -10,10 +10,9 @@ services:
     restart: always
     entrypoint: /entrypoint.dev.sh
     environment:
-      - DEBUG_MODE=true  
+      - DEBUG_MODE=false  
     volumes:
       - staticfiles:/backend/staticfiles
-      - ./backend/db.sqlite3:/backend/db.sqlite3
       - ./backend:/backend 
   webserver:
     build: 

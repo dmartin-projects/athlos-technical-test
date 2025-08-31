@@ -6,7 +6,6 @@ python --version || true
 which python || true
 which gunicorn || true
 
-# (Opcional) Espera simple a la BBDD si defines DB_HOST/DB_PORT
 if [[ -n "${DB_HOST:-}" ]]; then
   echo "Esperando a la BBDD ${DB_HOST}:${DB_PORT:-5432} ..."
   for i in {1..60}; do

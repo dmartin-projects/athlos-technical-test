@@ -1,50 +1,41 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
-import { useState } from 'react';
+import HotelSearch from './components/HotelSearch';
+import HotelList from './components/HotelList';
 
 function App() {
-  const [response, setResponse] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [currentView, setCurrentView] = useState('search');
 
-  const testBackendConnection = async () => {
-    setLoading(true);
-    try {
-      const apiUrl = process.env.REACT_APP_DOCKER_ENV 
-        ? 'http://localhost:8000'
-        : 'https://0b6bc3f6-0480-40e8-8c57-3af2460a82da-dev.e1-eu-north-azure.choreoapis.dev/pruebatecnica-david/backend/v1.0';
-      const res = await fetch(`${apiUrl}/api/v1/scrapper/test/`);
-      const data = await res.json();
-      setResponse(data);
-    } catch (error) {
-      setResponse({ error: error.message });
-    }
-    setLoading(false);
+  const showHotelList = () => {
+    setCurrentView('list');
+  };
+
+  const showHotelSearch = () => {
+    setCurrentView('search');
   };
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <button onClick={testBackendConnection} disabled={loading}>
-          {loading ? 'Testing...' : 'Test Backend Connection'}
-        </button>
-        {response && (
-          <div style={{ marginTop: '20px', padding: '10px', background: '#282c34', borderRadius: '5px' }}>
-            <pre>{JSON.stringify(response, null, 2)}</pre>
-          </div>
-        )}
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <nav className="app-nav">
+        <button 
+          className={`nav-button ${currentView === 'search' ? 'active' : ''}`}
+          onClick={showHotelSearch}
         >
-          Learn React
-        </a>
-      </header>
+          Buscar Hoteles
+        </button>
+        <button 
+          className={`nav-button ${currentView === 'list' ? 'active' : ''}`}
+          onClick={showHotelList}
+        >
+          Hoteles Guardados
+        </button>
+      </nav>
+
+      {currentView === 'search' ? (
+        <HotelSearch onShowSavedHotels={showHotelList} />
+      ) : (
+        <HotelList onBackToSearch={showHotelSearch} />
+      )}
     </div>
   );
 }

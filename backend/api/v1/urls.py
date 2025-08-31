@@ -1,5 +1,5 @@
 from django.urls import path, include
 
 urlpatterns = [
-    path('scrapper/', include('api.v1.scrapper.urls')),
+    path('hotels/', include('api.v1.scrapper.urls')),
 ]

@@ -1,0 +1,265 @@
+/* Contenedor principal */
+.hotel-search-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* Formulario de búsqueda */
+.search-container h1 {
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-info {
+  background-color: #e3f2fd;
+  border: 1px solid #90caf9;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.search-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #1565c0;
+}
+
+.search-info strong {
+  color: #0d47a1;
+}
+
+.search-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  width: 300px;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.search-button {
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.search-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.search-button.loading {
+  opacity: 0.7;
+}
+
+/* Mensajes de error */
+.error-message {
+  padding: 12px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Detalles del hotel */
+.hotel-details {
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  padding: 24px;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.hotel-details h2 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-size: 24px;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+}
+
+.hotel-info {
+  margin-bottom: 20px;
+}
+
+.hotel-info p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #495057;
+}
+
+.hotel-info strong {
+  color: #2c3e50;
+}
+
+.price-not-available {
+  color: #dc3545;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.hotel-description {
+  margin-bottom: 20px;
+}
+
+.hotel-description strong {
+  color: #2c3e50;
+  font-size: 16px;
+}
+
+.hotel-description p {
+  margin: 8px 0;
+  color: #495057;
+  line-height: 1.5;
+}
+
+.hotel-amenities {
+  margin-bottom: 20px;
+}
+
+.hotel-amenities strong {
+  color: #2c3e50;
+  font-size: 16px;
+}
+
+.hotel-amenities p {
+  margin: 8px 0;
+  color: #495057;
+  font-style: italic;
+}
+
+/* Imágenes */
+.hotel-images {
+  margin-bottom: 24px;
+}
+
+.hotel-images strong {
+  color: #2c3e50;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.hotel-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.hotel-image:hover {
+  transform: scale(1.05);
+}
+
+/* Botones de acciones */
+.hotel-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.save-button {
+  padding: 14px 28px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.save-button:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.save-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.save-button.saving {
+  opacity: 0.7;
+}
+
+.view-saved-button {
+  padding: 14px 28px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.view-saved-button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hotel-search-container {
+    padding: 15px;
+  }
+  
+  .search-input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .search-form {
+    flex-direction: column;
+  }
+  
+  .images-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  
+  .hotel-image {
+    height: 120px;
+  }
+}
