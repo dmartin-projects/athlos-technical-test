@@ -15,7 +15,6 @@ Web application for scraping hotel data from Booking.com with a React frontend a
 
 2. **Access the application:**
    - Frontend: http://localhost:80
-   - Backend API: http://localhost:8000
    - Swagger Documentation: http://localhost:8000/api/v1/docs/
 
 ### Cloud Deploy
