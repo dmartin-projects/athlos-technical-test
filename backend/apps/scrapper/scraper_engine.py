@@ -1,3 +1,4 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
@@ -12,6 +13,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.chrome.service import Service
+
+os.environ['SELENIUM_CACHE_PATH'] = '/tmp/selenium-cache'
 
 logger = logging.getLogger('django')
 
@@ -37,6 +40,8 @@ class ScrapperEngine:
             chrome_options.add_argument('--disable-gpu')
             chrome_options.add_argument('--window-size=1920,1080')
             chrome_options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36')
+            chrome_options.add_argument('--user-data-dir=/tmp/chrome-user-data')
+            chrome_options.add_argument('--cache-dir=/tmp/chrome-cache')
             
             chrome_options.binary_location = '/usr/bin/chromium'
             

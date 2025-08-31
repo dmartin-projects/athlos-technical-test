@@ -37,6 +37,19 @@ def get_hotel_by_id(request, id:str):
         return Response({"ok": False,"msg": f"An unexpected error occurred retrieving or deleting Hotel with ID {id}","error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 
+@extend_schema(
+    parameters=[
+        OpenApiParameter(
+            name='name',
+            type=str,
+            location=OpenApiParameter.QUERY,
+            required=True,
+            description='Hotel name to search for on Booking.com'
+        )
+    ],
+    summary="Scrape Hotel Data",
+    description="Scrapes Booking.com to get hotel data without saving to database"
+)
 @api_view(['GET'])
 def get_hotel_scrape_data(request):
     """Scrapes Booking.com to get hotel data without saving to database"""
