@@ -8,7 +8,7 @@ Web application for scraping hotel data from Booking.com with a React frontend a
 
 1. **Clone and run with Docker:**
    ```bash
-   git clone <repository>
+   git clone git@github.com:dmartin-projects/athlos-technical-test.git
    cd athlos-technical-test
    docker-compose up --build
    ```
@@ -28,6 +28,8 @@ You can test this app at this [link](https://3b94243c-3966-4999-831b-ee2d97f5d39
 > This means it shuts down every hour, and the server admin has to restart it manually.  
 > You will be able to test the first endpoint (scraping booking information), but not the endpoints that depend on the database.
 
+>Due to the limitations of Choreo’s free version, it is not possible to use the Selenium function for the image scraper. 
+>Choreo does not allow writing to the file system after deployment, so in production the app cannot save or scrape images from Booking.
 
 ## Architecture
 
@@ -55,7 +57,6 @@ All endpoints return standardized JSON responses:
   "ok": true,
   "data": {...},
   "msg": "Success message",
-  "count": 10
 }
 ```
 
